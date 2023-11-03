@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.container {
+  @apply max-w-[1200px] px-4 mx-auto;
+}
+
+/* Button */
+.primary-btn {
+  @apply bg-primary font-extrabold text-white py-[10px] rounded-lg hover:bg-[#d91400] transition;
+}
+
+/* Form */
+.form-input-label {
+  @apply dark:text-bold_black font-extrabold text-sm;
+}
+
+/* 404 page */
+.not-found-background {
+  @apply h-screen w-full relative;
+  background: url("/public/assets/images/404/404-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.not-found-foreground {
+  @apply h-screen w-full absolute;
+  background: url("/public/assets/images/404/404-foreground.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Home page */
+.home-background {
+  @apply w-full aspect-[4.8] relative;
+  background: url("/public/assets/images/home/home-banner.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
