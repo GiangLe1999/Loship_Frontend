@@ -6,6 +6,7 @@
 
 body {
   font-family: "Nunito", sans-serif;
+  @apply bg-[#f6f6f6];
 }
 
 .container {
@@ -45,4 +46,19 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+/* Protion Swiper */
+
+.promotion-swiper {
+  @apply mt-20 !mx-14;
+}
+
+.promotion-swiper-button-next,
+.promotion-swiper-button-prev {
+  @apply absolute top-1/2 -translate-y-1/2 right-1 w-10 h-10 bg-[#33333383] hover:bg-[#333333] grid place-items-center rounded-lg cursor-pointer transition;
+}
+
+.promotion-swiper-button-prev {
+  @apply left-1;
 }

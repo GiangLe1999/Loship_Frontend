@@ -10,6 +10,7 @@ import {
   EditProfileMutationVariables,
 } from "../../__generated__/graphql";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const EDIT_PROFILE_MUTATION = gql`
   mutation editProfile($input: EditProfileInput!) {
@@ -120,6 +121,10 @@ const EditProfile: FC<Props> = (props): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Thông tin người dùng | Loship</title>
+      </Helmet>
+
       <Header />
       <div className="border rounded-md p-6 pb-9 w-[500px] mx-auto mt-[8%] shadow">
         <h1 className="font-bold text-3xl text-primary mb-5">Edit Profile</h1>
