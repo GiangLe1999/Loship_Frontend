@@ -9,6 +9,7 @@ import ConfirmEmail from "../pages/user/confirm-email";
 import { gql } from "@apollo/client";
 import EditProfile from "../pages/user/edit-profile";
 import { path } from "../constants";
+import Search from "../pages/client/search";
 
 interface Props {}
 
@@ -33,11 +34,10 @@ const clientRoutes = [
     component: <ConfirmEmail />,
   },
   { path: path.editProfile, component: <EditProfile /> },
-
-  // {
-  //   path: "/search",
-  //   component: <Search />,
-  // },
+  {
+    path: "/search",
+    component: <Search />,
+  },
   // {
   //   path: "/category/:slug",
   //   component: <Category />,

@@ -1,18 +1,22 @@
-import { FC } from "react";
-import SearchBar from "../../components/restaurants-page/search-bar";
-import Header from "../../components/layout/header";
+import { FC, useState } from "react";
 import { Helmet } from "react-helmet";
 import { gql, useQuery } from "@apollo/client";
 import {
   RestaurantsPageQuery,
   RestaurantsPageQueryVariables,
 } from "../../__generated__/graphql";
-import DestinationBar from "../../components/restaurants-page/destination-bar";
 import PromotionSwiper from "../../components/restaurants-page/promotion-swiper";
 import CategoryItem from "../../components/restaurants-page/category-item";
 import StyledImage from "../../components/styled-image";
 import { Link } from "react-router-dom";
 import RestaurantCard from "../../components/restaurant-card";
+import ResponsivePagination from "react-responsive-pagination";
+import "react-responsive-pagination/themes/classic.css";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { RESTAURANT_FRAGMENT } from "../../fragments";
+import ClientPageTopSection from "../../components/layout/client-page-top-section";
+import RestaurantResults from "../../components/restaurants-page/restaurant-results";
 
 const RESTAURANTS_QUERY = gql`
   query restaurantsPage($input: RestaurantsInput!) {
@@ -34,42 +38,29 @@ const RESTAURANTS_QUERY = gql`
       totalPages
       totalResults
       results {
-        id
-        name
-        coverImg
-        category {
-          name
-        }
-        address
-        isPromoted
+        ...RestaurantParts
       }
     }
   }
+  ${RESTAURANT_FRAGMENT}
 `;
 
 interface Props {}
 
 const Restaurants: FC<Props> = (props): JSX.Element => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const { data, loading, error } = useQuery<
     RestaurantsPageQuery,
     RestaurantsPageQueryVariables
-  >(RESTAURANTS_QUERY, { variables: { input: { page: 1 } } });
+  >(RESTAURANTS_QUERY, { variables: { input: { page: currentPage } } });
 
   return (
     <>
       <Helmet>
         <title>Loship | Luôn Freeship đồ ăn</title>
       </Helmet>
-      <Header />
-      <div className="home-background flex flex-col items-center justify-center gap-y-6 pt-8">
-        <h1 className="uppercase text-center font-black text-5xl leading-[60px]">
-          <span className="text-[#333]">Đặt món nào</span> <br />
-          <span className="text-primary">cũng freeship</span>
-        </h1>
-
-        <SearchBar />
-        <DestinationBar />
-      </div>
+      <ClientPageTopSection initialSearchQuery="" />
       <PromotionSwiper />
 
       <div className="container">
@@ -91,11 +82,13 @@ const Restaurants: FC<Props> = (props): JSX.Element => {
         </div>
 
         <h2 className="font-extrabold uppercase text-xl mt-10">THỬ QUÁN MỚI</h2>
-        <div className="grid grid-cols-5 gap-4 mt-4">
-          {data?.restaurants.results?.map((restaurant) => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-          ))}
-        </div>
+        <RestaurantResults
+          currentPage={currentPage}
+          loading={loading}
+          restaurants={data?.restaurants.results}
+          setCurrentPage={setCurrentPage}
+          totalPages={data?.restaurants.totalPages || 1}
+        />
       </div>
     </>
   );

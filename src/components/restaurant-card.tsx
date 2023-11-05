@@ -4,24 +4,10 @@ import { Link } from "react-router-dom";
 import { MdFastfood } from "react-icons/md";
 
 interface Props {
-  restaurant: {
-    id: number;
-    name: string;
-    coverImg: string;
-    address: string;
-    isPromoted: boolean;
-    category?:
-      | {
-          __typename?: "Category" | undefined;
-          name: string;
-        }
-      | null
-      | undefined;
-  };
+  restaurant: any;
 }
 
 const RestaurantCard: FC<Props> = ({ restaurant }): JSX.Element => {
-  console.log(restaurant);
   return (
     <Link to="/" className="rounded-lg border">
       <StyledImage
