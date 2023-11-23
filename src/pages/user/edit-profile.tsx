@@ -126,7 +126,7 @@ const EditProfile: FC<Props> = (props): JSX.Element => {
       </Helmet>
 
       <Header />
-      <div className="border rounded-md p-6 pb-9 w-[500px] mx-auto mt-[8%] shadow">
+      <div className="border rounded-md p-6 pb-9 w-[500px] mx-auto mt-[8%] shadow bg-white">
         <h1 className="font-bold text-3xl text-primary mb-5">Edit Profile</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>

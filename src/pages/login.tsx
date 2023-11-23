@@ -16,7 +16,6 @@ import {
 } from "../__generated__/graphql";
 import AuthCommitContent from "../components/auth-commit-content";
 import { authTokenVar, isLoggedInVar } from "../apollo";
-import { useHistory } from "react-router-dom";
 
 const LOGIN_MUTATION = gql`
   mutation login($loginInput: LoginInput!) {

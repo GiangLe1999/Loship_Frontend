@@ -10,6 +10,14 @@ import { gql } from "@apollo/client";
 import EditProfile from "../pages/user/edit-profile";
 import { path } from "../constants";
 import Search from "../pages/client/search";
+import Category from "../pages/client/category";
+import Restaurant from "../pages/client/restaurant";
+import Categories from "../pages/client/categories";
+import MyRestaurants from "../pages/owner/my-restaurants";
+import AddRestaurant from "../pages/owner/add-restaurant";
+import MyRestaurant from "../pages/owner/my-restaurant";
+import AddDish from "../pages/owner/add-dish";
+import CheckoutSuccess from "../pages/owner/checkout-success";
 
 interface Props {}
 
@@ -29,37 +37,41 @@ const clientRoutes = [
     path: "/",
     component: <Restaurants />,
   },
-  {
-    path: "/confirm",
-    component: <ConfirmEmail />,
-  },
-  { path: path.editProfile, component: <EditProfile /> },
+
   {
     path: "/search",
     component: <Search />,
   },
-  // {
-  //   path: "/category/:slug",
-  //   component: <Category />,
-  // },
-  // {
-  //   path: "/restaurants/:id",
-  //   component: <Restaurant />,
-  // },
+  {
+    path: "/category/:slug",
+    component: <Category />,
+  },
+  {
+    path: "/categories",
+    component: <Categories />,
+  },
+  {
+    path: "/restaurant/:id",
+    component: <Restaurant />,
+  },
 ];
 
-// const commonRoutes = [
-//   { path: "/confirm", component: <ConfirmEmail /> },
-//   { path: "/edit-profile", component: <EditProfile /> },
-//   { path: "/orders/:id", component: <Order /> },
-// ];
+const commonRoutes = [
+  { path: "/confirm", component: <ConfirmEmail /> },
+  { path: "/edit-profile", component: <EditProfile /> },
+  // { path: "/orders/:id", component: <Order /> },
+];
 
-// const restaurantRoutes = [
-//   { path: "/", component: <MyRestaurants /> },
-//   { path: "/add-restaurant", component: <AddRestaurant /> },
-//   { path: "/restaurants/:id", component: <MyRestaurant /> },
-//   { path: "/restaurants/:restaurantId/add-dish", component: <AddDish /> },
-// ];
+const restaurantRoutes = [
+  { path: "/", component: <MyRestaurants /> },
+  { path: "/add-restaurant", component: <AddRestaurant /> },
+  { path: "/restaurant/:id", component: <MyRestaurant /> },
+  { path: "/restaurant/:restaurantId/add-dish", component: <AddDish /> },
+  {
+    path: "/restaurant/:restaurantId/checkout-success",
+    component: <CheckoutSuccess />,
+  },
+];
 
 const LoggedInRouter: FC<Props> = (props): JSX.Element => {
   const { data, loading, error } = useMe();
@@ -80,6 +92,19 @@ const LoggedInRouter: FC<Props> = (props): JSX.Element => {
               {route.component}
             </Route>
           ))}
+
+        {data.me.role === UserRole.Owner &&
+          restaurantRoutes.map((route) => (
+            <Route exact key={route.path} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+
+        {commonRoutes.map((route) => (
+          <Route exact key={route.path} path={route.path}>
+            {route.component}
+          </Route>
+        ))}
         <Route>
           <NotFound />
         </Route>

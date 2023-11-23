@@ -4,12 +4,12 @@ import StyledImage from "../styled-image";
 import { Link } from "react-router-dom";
 
 interface Props {
-  category: Omit<Category, "createdAt" | "updatedAt">;
+  category: Category;
 }
 
 const CategoryItem: FC<Props> = ({ category }): JSX.Element => {
   return (
-    <Link to="/">
+    <Link to={`/category/${category.slug}`}>
       <StyledImage
         wrapperClasses="w-full aspect-square rounded-lg overflow-hidden bg-white"
         src={category.coverImg || ""}

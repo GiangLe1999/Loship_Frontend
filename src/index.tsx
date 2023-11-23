@@ -1,10 +1,10 @@
 import ReactDOM from "react-dom/client";
 import "./global.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo";
 import { Toaster } from "react-hot-toast";
+import App from "./components/app";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

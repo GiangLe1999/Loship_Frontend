@@ -23,7 +23,7 @@ const Header: FC<Props> = (props): JSX.Element => {
           </div>
         </div>
       )}
-      <header>
+      <header className="bg-white shadow">
         <div className="max-w-5xl flex items-center text-xs justify-center gap-9 py-2 mx-auto">
           <div className="flex items-center gap-1">
             <StyledImage

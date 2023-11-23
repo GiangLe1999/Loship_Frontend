@@ -13,6 +13,14 @@ body {
   @apply max-w-[1200px] px-4 mx-auto;
 }
 
+.common-shadow {
+  box-shadow: 0 2px 4px #00000012;
+}
+
+.hover-shadow {
+  box-shadow: 0 5px 15px #0000004d;
+}
+
 /* Button */
 .primary-btn {
   @apply bg-primary font-extrabold text-white py-[10px] rounded-lg hover:bg-[#d91400] transition;
@@ -66,8 +74,7 @@ body {
 /* Pagination */
 /* Paginagation */
 .pagination .page-link {
-  @apply !rounded-lg grid !text-[#333] font-bold text-sm !border-transparent !py-[10px] !px-4;
-  box-shadow: 0 2px 4px #00000012;
+  @apply !rounded-lg grid !text-[#333] font-bold text-sm !border-transparent !py-[10px] !px-4 common-shadow;
 }
 
 .pagination .page-item.active .page-link {
@@ -76,4 +83,27 @@ body {
 
 .pagination .page-item.disabled .page-link {
   @apply !text-[#ccc];
+}
+
+/* Modal */
+.react-responsive-modal-root .react-responsive-modal-overlay,
+.react-responsive-modal-root .react-responsive-modal-container,
+.react-responsive-modal-root .react-responsive-modal-modal {
+  animation-fill-mode: initial !important;
+}
+
+.react-responsive-modal-modal {
+  @apply rounded-sm;
+}
+
+.react-responsive-modal-closeButton {
+  @apply fill-white;
+}
+
+.react-responsive-modal-modal {
+  @apply !p-0 !m-0;
+}
+
+.customModal {
+  @apply rounded-md w-1/2 py-0;
 }

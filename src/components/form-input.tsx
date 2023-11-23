@@ -44,7 +44,7 @@ const FormInput: FC<Props> = ({
         id={id}
         type={type || "text"}
         {...register}
-        className={`w-full outline-none border-none bg-[#eeeeee] rounded-lg py-[10px] px-4 ${
+        className={`w-full outline-none border-none bg-[#eeeeee92] rounded-lg py-[10px] px-4 ${
           disabled && "opacity-50"
         }`}
         rows={rows}

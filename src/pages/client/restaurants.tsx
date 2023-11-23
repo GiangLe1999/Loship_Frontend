@@ -9,12 +9,9 @@ import PromotionSwiper from "../../components/restaurants-page/promotion-swiper"
 import CategoryItem from "../../components/restaurants-page/category-item";
 import StyledImage from "../../components/styled-image";
 import { Link } from "react-router-dom";
-import RestaurantCard from "../../components/restaurant-card";
-import ResponsivePagination from "react-responsive-pagination";
 import "react-responsive-pagination/themes/classic.css";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { RESTAURANT_FRAGMENT } from "../../fragments";
+import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from "../../fragments";
 import ClientPageTopSection from "../../components/layout/client-page-top-section";
 import RestaurantResults from "../../components/restaurants-page/restaurant-results";
 
@@ -24,11 +21,7 @@ const RESTAURANTS_QUERY = gql`
       ok
       error
       categories {
-        id
-        name
-        coverImg
-        slug
-        restaurantCount
+        ...CategoryParts
       }
     }
 
@@ -43,6 +36,7 @@ const RESTAURANTS_QUERY = gql`
     }
   }
   ${RESTAURANT_FRAGMENT}
+  ${CATEGORY_FRAGMENT}
 `;
 
 interface Props {}
@@ -50,7 +44,7 @@ interface Props {}
 const Restaurants: FC<Props> = (props): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, loading, error } = useQuery<
+  const { data, loading } = useQuery<
     RestaurantsPageQuery,
     RestaurantsPageQueryVariables
   >(RESTAURANTS_QUERY, { variables: { input: { page: currentPage } } });
@@ -65,10 +59,10 @@ const Restaurants: FC<Props> = (props): JSX.Element => {
 
       <div className="container">
         <div className="grid grid-cols-10 gap-5 mt-10">
-          {data?.allCategories.categories?.map((category) => (
+          {data?.allCategories.categories?.map((category: any) => (
             <CategoryItem key={category.id} category={category} />
           ))}
-          <Link to="/">
+          <Link to="/categories">
             <StyledImage
               wrapperClasses="w-full aspect-square rounded-full"
               src="/assets/images/home/symbol-food.png"
